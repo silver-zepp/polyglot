@@ -1,0 +1,11 @@
+{
+  "name": "auto-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@silver-zepp/polyglot": "^0.9.77"
+  }
+}

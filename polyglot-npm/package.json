@@ -1,0 +1,38 @@
+{
+  "name": "@silver-zepp/polyglot",
+  "version": "1.0.0",
+  "description": "Polyglot - The Ultimate Localization Toolkit for ZeppOS",
+  "bin": {
+    "poly": "./polyglot-node/poly.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silver-zepp/polyglot.git"
+  },
+  "keywords": [
+    "i18n",
+    "translations",
+    "polyglot",
+    "localization",
+    "zeppos"
+  ],
+  "zeppos": true,
+  "author": "Silver, Zepp Health",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/silver-zepp/polyglot/issues"
+  },
+  "homepage": "https://github.com/silver-zepp/polyglot#readme",
+  "dependencies": {
+    "@google-cloud/translate": "^8.3.0",
+    "exceljs": "^4.4.0",
+    "node-fetch": "^2.6.1",
+    "fs-extra": "^11.2.0",
+    "semver": "^7.6.2",
+    "commander": "^7.2.0"
+  },
+  "files": [
+    "polyglot-mini/",
+    "polyglot-node/"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "empty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@zeppos/device-types": "^2.0.0"
+  },
+  "dependencies": {
+    "@google-cloud/translate": "^8.3.0",
+    "@silver-zepp/autogui": "^1.2.9",
+    "@silver-zepp/vis-log": "^1.0.8",
+    "adm-zip": "^0.5.12",
+    "exceljs": "^4.4.0",
+    "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2",
+    "@silver-zepp/polyglot": "^0.9.77"
+  }
+}

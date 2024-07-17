@@ -1,0 +1,21 @@
+{
+  "name": "@silver-zepp/polyglot",
+  "version": "0.0.0",
+  "description": "Polyglot Mini - The Ultimate Localization Toolkit for ZeppOS",
+  "main": "dist/polyglot.js",
+  "types": "ts/polyglot.d.ts",
+  "keywords": [
+    "i18n",
+    "translations",
+    "polyglot",
+    "localization",
+    "zeppos"
+  ],
+  "zeppos": true,
+  "author": "Silver, Zepp Health",
+  "license": "MIT",
+  "files": [
+    "dist/",
+    "ts/"
+  ]
+}
