@@ -17,6 +17,9 @@ The `Polyglot` library is the ultimate solution for managing localizations in `Z
 - 📣 Event-Driven Localization
 - ⚡ Quick integration with your mini app
 
+### Real-life example: Mini Chess app on Bip 5
+![](./assets/mini-chess-polyglot.gif)
+
 ## Navigation
 #### [ [📁 Download Examples](https://github.com/silver-zepp/polyglot/archive/refs/heads/master.zip) ]
 #### [[ 🚀 Quick Start ]](#quickstart)
@@ -41,6 +44,12 @@ An `Amazfit` watch running `ZeppOS v2` or higher.
 For the convenience of managing all your translations in one place, `Polyglot` utilizes an Excel format `.xlsx` file. If you don't have Microsoft Office installed, you can use one of these free alternatives to work with `.xlsx` files:
 - [Libre Office](https://www.libreoffice.org/download/download-libreoffice/)
 - [WPS Office](https://www.wps.com/download/)
+
+## 🎥 Video tutorial
+### Learn how to port your existing project to `Polyglot` using our [Calories 2.0 sample](https://github.com/zepp-health/zeppos-samples/tree/main/application/2.0/calories)
+<a href="https://www.youtube.com/watch?v=CcOU0V2A9xc">
+  <img src="https://img.youtube.com/vi/CcOU0V2A9xc/maxresdefault.jpg" width="640" height="360" alt="Polyglot">
+</a>
 
 ## 🚀 Quick Start <a id="quickstart"></a>
 1. Install the library `npm i @silver-zepp/polyglot -g`
