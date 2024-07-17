@@ -5,8 +5,7 @@ The `Polyglot` library is the ultimate solution for managing localizations in `Z
 
 ![](./assets/poly-example.gif)
 
-### 
-  >💡 Interesting fact: Even in the US, 20% speak another language. 🌐 Polyglot makes ZeppOS apps go global and welcomes everyone, everywhere.
+>💡 Interesting fact: Even in the US, 20% speak another language. 🌐 Polyglot makes ZeppOS apps go truly global and welcomes everyone, everywhere.
 
 ### Strong Sides of Polyglot
 - 🌍 Autotranslation of your mini app to 10+ languages within seconds
@@ -34,7 +33,7 @@ To integrate `Polyglot` library into your project, first, install `Polyglot` lib
 ```bash
 npm i @silver-zepp/polyglot -g
 ```
-💡Note the `-g` global flag
+>💡Note the `-g` global flag
 
 Then install the library inside any of your mini apps by running `poly init` from the root of your project.
 
