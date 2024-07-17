@@ -31,7 +31,7 @@ To integrate `Polyglot` library into your project, first, install `Polyglot` lib
 ```bash
 npm i @silver-zepp/polyglot -g
 ```
-💡Note the `-g` global flag
+>💡Note the `-g` global flag
 
 Then install the library inside any of your mini apps by running `poly init` from the root of your project.
 
