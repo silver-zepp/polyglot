@@ -16,7 +16,7 @@ The `Polyglot` library is the ultimate solution for managing localizations in `Z
 - 📣 Event-Driven Localization
 - ⚡ Quick integration with your mini app
 
-### Real-life example: Mini Chess app on Bip 5
+### Real-life example: `Mini Chess` app on Bip 5
 ![](./assets/mini-chess-polyglot.gif)
 
 ## Navigation
