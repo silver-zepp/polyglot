@@ -1,6 +1,6 @@
 {
   "name": "@silver-zepp/polyglot",
-  "version": "1.0.0",
+  "version": "1.0.2-d",
   "description": "Polyglot - The Ultimate Localization Toolkit for ZeppOS",
   "bin": {
     "poly": "./polyglot-node/poly.js"
@@ -14,7 +14,8 @@
     "translations",
     "polyglot",
     "localization",
-    "zeppos"
+    "zeppos",
+    "Zepp OS"
   ],
   "zeppos": true,
   "author": "Silver, Zepp Health",
@@ -30,9 +31,5 @@
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
     "commander": "^7.2.0"
-  },
-  "files": [
-    "polyglot-mini/",
-    "polyglot-node/"
-  ]
+  }
 }

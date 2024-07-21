@@ -12,7 +12,7 @@ const npmroot = "@silver-zepp";
 const trans_fpath_global = path.join(__dirname, "translations.xlsx");
 const project_dir_path = process.cwd();
 const polygen_path = path.join(__dirname, 'polygenerator.js');
-const global_poly_path = path.join(__dirname, '..');
+const global_poly_path = path.join(__dirname, '..'); 
 const local_poly_path = path.join(project_dir_path, 'node_modules', npmroot, 'polyglot');
 
 // scripts
@@ -31,6 +31,11 @@ function runInit() { // initialize project
         console.log('Skipping copying the translations.xlsx. File already exists.');
     }
 
+    // 2 & 3 UPDATE DEPENDENCIES & INSTALL POLY
+    installLocalPoly();
+}
+
+function installLocalPoly(is_update = false){
     // 2. UPDATE DEPENDENCIES
     // read the global polyglot package.json to get the version number
     const global_package_json_path = path.join(global_poly_path, 'package.json');
@@ -65,27 +70,31 @@ function runInit() { // initialize project
         const mini_app_dest = path.join(local_poly_path);
         fs.cpSync(path.join(mini_app_source, 'dist'), path.join(mini_app_dest, 'dist'), { recursive: true });
         fs.cpSync(path.join(mini_app_source, 'ts'), path.join(mini_app_dest, 'ts'), { recursive: true });
-
+        
         // sync version in mini app's package.json with system version
         const mini_package_json_path = path.join(mini_app_source, 'package.json');
         const mini_package_json = fs.readJsonSync(mini_package_json_path);
-        mini_package_json.version = global_package_json.version;
-        fs.writeJsonSync(path.join(mini_app_dest, 'package.json'), mini_package_json, { spaces: 2 });
+        mini_package_json.version = global_package_json.version; 
+        fs.writeJsonSync(path.join(mini_app_dest, 'package.json'), mini_package_json, { spaces: 2 });        
 
-        console.log(`
-            Successfully installed Polyglot into your project.
-            
-            Now you can:
-            -------------------------------------------------------
-            1) run \x1b[32mpoly trans\x1b[0m to setup your translations
-            2) run \x1b[32mpoly gen\x1b[0m to generate translations
-            3) import library into your project and start using it: 
-            -------------------------------------------------------
-            \x1b[32mimport { Polyglot } from "${npmroot}/polyglot";\x1b[0m
-            \x1b[32mconst poly = new Polyglot();\x1b[0m
-            \x1b[32mconsole.log(poly.getText("example"));\x1b[0m
-            -------------------------------------------------------`
-        );
+        if (!is_update){
+            console.log(`
+                Successfully installed Polyglot into your project.
+                
+                Now you can:
+                -------------------------------------------------------
+                1) run \x1b[32mpoly trans\x1b[0m to setup your translations
+                2) run \x1b[32mpoly gen\x1b[0m to generate translations
+                3) import library into your project and start using it: 
+                -------------------------------------------------------
+                \x1b[32mimport { Polyglot } from "${npmroot}/polyglot";\x1b[0m
+                \x1b[32mconst poly = new Polyglot();\x1b[0m
+                \x1b[32mconsole.log(poly.getText("example"));\x1b[0m
+                -------------------------------------------------------`
+            );
+        } else {
+            console.log(`Successfully updated Polyglot to version \x1b[32m${global_package_json.version}\x1b[0m.`);
+        }
     } catch (error) {
         console.error(`Failed to copy Polyglot to the project: ${error}`);
     }
@@ -197,10 +206,10 @@ function openFile(full_path) {
 }
 
 function isValidZeppOsRootDir() {
-    const app_json = path.join(process.cwd(), 'app.json');
-    const app_js = path.join(process.cwd(), 'app.js');
+	const app_json = path.join(process.cwd(), 'app.json');
+	const app_js = path.join(process.cwd(), 'app.js');
 
-    return (fs.existsSync(app_json) && fs.existsSync(app_js));
+	return (fs.existsSync(app_json) && fs.existsSync(app_js));
 }
 
 function checkInitializationAndUpdate() {
@@ -213,25 +222,10 @@ function checkInitializationAndUpdate() {
         throw new Error('Polyglot has not been initialized. Please run "poly init" first.');
     }
 
-    const global_package_json_path = path.join(global_poly_path, 'polyglot-mini', 'package.json');
-    const local_package_json_path = path.join(local_poly_path, 'package.json');
-
-    if (!fs.existsSync(local_package_json_path)) {
-        throw new Error('Local Polyglot module not found. Please run "poly init" to install it.');
-    }
-
-    const global_package_json = fs.readJsonSync(global_package_json_path);
-    const local_package_json = fs.readJsonSync(local_package_json_path);
-
-    if (semver.gt(global_package_json.version, local_package_json.version)) {
-        fs.copySync(path.join(global_poly_path, 'polyglot-mini', 'dist'), path.join(local_poly_path, 'dist'), { overwrite: true });
-        fs.copySync(path.join(global_poly_path, 'polyglot-mini', 'ts'), path.join(local_poly_path, 'ts'), { overwrite: true });
-        fs.copySync(global_package_json_path, local_package_json_path, { overwrite: true });
-        console.log(`Polyglot module was updated to version \x1b[32m${global_package_json.version}\x1b[0m.`);
-    }
+    installLocalPoly(true);
 }
 
-function createRootJSON(project_package_json_path, polyglot_version) {
+function createRootJSON(project_package_json_path, polyglot_version){
     // create a basic package.json if it doesn't exist
     const basic_package_json = {
         name: 'auto-package',
@@ -292,7 +286,7 @@ program
         runParse();
     });
 
-program
+    program
     .command('version')
     .description('Display all Polyglot module versions')
     .action(() => {
@@ -321,7 +315,7 @@ program
 
         https.request(options, res => {
             let raw_data = '';
-
+            
             res.on('data', chunk => {
                 raw_data += chunk;
             });
@@ -358,3 +352,5 @@ program.parse(process.argv);
 if (!process.argv.slice(2).length) {
     program.help();
 }
+
+// @fix 1.0.2; now the auto update should properly work
