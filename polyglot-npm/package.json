@@ -1,6 +1,6 @@
 {
   "name": "@silver-zepp/polyglot",
-  "version": "1.0.2-d",
+  "version": "1.0.3-a",
   "description": "Polyglot - The Ultimate Localization Toolkit for ZeppOS",
   "bin": {
     "poly": "./polyglot-node/poly.js"

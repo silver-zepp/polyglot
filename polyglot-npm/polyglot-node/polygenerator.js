@@ -17,6 +17,7 @@ const CELL_ICONRES = "B5";
 const CELL_CHARLIMIT = "B6";
 const CELL_TRAILINGCHAR = "B7";
 const CELL_APIKEY = "B8";
+const CELL_MINIFYJSON = "B9";
 
 let is_icon_generated = false;
 
@@ -184,10 +185,6 @@ async function gSingleTranslate(text, sourcelang, targetlang) {
 }
 
 async function generateJsonFiles() {
-	const app_json_path = path.join(project_dir_path, 'app.json');
-	const app_json = JSON.parse(fs.readFileSync(app_json_path, 'utf8'));
-	const targets = app_json.targets || {};
-
 	const workbook = new exceljs.Workbook();
 	await workbook.xlsx.readFile(trans_fpath_user);
 
@@ -205,6 +202,8 @@ async function generateJsonFiles() {
 	const iconres_cell = settings_sheet.getCell(CELL_ICONRES);
 	const iconres = (iconres_cell && iconres_cell.value) ? iconres_cell.value : 64;
 
+	let minifyjson_cell = settings_sheet.getCell(CELL_MINIFYJSON).value;
+
 	const keys_sheet = workbook.getWorksheet(SHEET_KEYS);
 	if (!keys_sheet) {
 		throw new Error('Keys sheet does not exist in the workbook.');
@@ -220,6 +219,13 @@ async function generateJsonFiles() {
 			fs.unlinkSync(path.join(translations_dir, file));
 		}
 	}
+
+	// JSON minification logic
+    if (minifyjson_cell === null || minifyjson_cell === undefined) {
+        minifyjson_cell = false; // default, for when the user doesn't have minifyjson CELL
+    } else {
+        minifyjson_cell = minifyjson_cell.toString().toUpperCase() === 'TRUE';
+    }
 
 	workbook.eachSheet((sheet) => {
 		if (!sheet.name.includes('-')) {
@@ -262,7 +268,10 @@ async function generateJsonFiles() {
 		const filtered_translations = Object.fromEntries(
 			Object.entries(translations).filter(([key, _]) => key !== null && key !== '')
 		);
-		fs.writeFileSync(json_fpath, JSON.stringify(filtered_translations, null, 2), 'utf8');
+
+		// apply mini
+        const add_space = minifyjson_cell ? 0 : 1; // 1 space
+		fs.writeFileSync(json_fpath, JSON.stringify(filtered_translations, null, add_space), 'utf8');
 	});
 
 	console.log('JSON translation files generated.');
@@ -282,4 +291,6 @@ main();
 /**
 * 1.0.0
 * - initial release
+* 1.0.3
+* - @add minification of JSON files (FALSE in excel file by default)
 */

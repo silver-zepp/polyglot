@@ -32,10 +32,10 @@ function runInit() { // initialize project
     }
 
     // 2 & 3 UPDATE DEPENDENCIES & INSTALL POLY
-    installLocalPoly();
+    installLocalPoly("install");
 }
 
-function installLocalPoly(is_update = false){
+function installLocalPoly(action = null){
     // 2. UPDATE DEPENDENCIES
     // read the global polyglot package.json to get the version number
     const global_package_json_path = path.join(global_poly_path, 'package.json');
@@ -77,7 +77,7 @@ function installLocalPoly(is_update = false){
         mini_package_json.version = global_package_json.version; 
         fs.writeJsonSync(path.join(mini_app_dest, 'package.json'), mini_package_json, { spaces: 2 });        
 
-        if (!is_update){
+        if (action == "install"){
             console.log(`
                 Successfully installed Polyglot into your project.
                 
@@ -92,7 +92,7 @@ function installLocalPoly(is_update = false){
                 \x1b[32mconsole.log(poly.getText("example"));\x1b[0m
                 -------------------------------------------------------`
             );
-        } else {
+        } else if (action == "update") {
             console.log(`Successfully updated Polyglot to version \x1b[32m${global_package_json.version}\x1b[0m.`);
         }
     } catch (error) {
@@ -353,4 +353,11 @@ if (!process.argv.slice(2).length) {
     program.help();
 }
 
-// @fix 1.0.2; now the auto update should properly work
+/**
+ * 1.0.0
+ * - init
+ * 1.0.2
+ * - @fix 1.0.2; now the auto update should properly work
+ * 1.0.3
+ * - @fix 1.0.3 got rid of constant "Poly was updated" nag
+ */
